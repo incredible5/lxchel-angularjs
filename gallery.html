@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script>
+		var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $http) {
+        $http.get("images.php")
+        .then(function(response) {
+          $scope.images = response.data;
+          console.log($scope.images);
+        });
+      });
+	</script>
+	<style type="text/css">
+  body
+  {
+    overflow-x: hidden;
+  }
+    .desc
+    {
+      background-color: rgba(200, 200, 200, 0.8);
+      margin: 3px;
+    }
+    .row
+    {
+      padding: 0 30px 0 30px;
+    }
+		.column
+    {
+      display: inline-block;
+      width: 33.33%;
+      padding: 10px;
+    }
+    .column img
+    {
+      opacity: 1; 
+      cursor: pointer; 
+    }
+    .column img:hover
+    {
+      opacity: 1;
+    }
+
+	</style>
+</head>
+  <body ng-app="myApp" ng-controller="myCtrl">
+    <div class="row">
+      <div class="column" ng-repeat="image in images">
+          <img class="img-responsive" ng-src="{{image.src}}" alt="{{image.alt}}" />
+          <br><span>{{image.line}}</span><span class="desc">{{image.desc1}}</span><span class="desc">{{image.desc2}}</span><span class="desc">{{image.desc3}}</span>
+      </div>
+    </div>
+  </body>
+</html>
